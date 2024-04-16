@@ -6,46 +6,32 @@
  */
 
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
-}
+const Layout = ({ children }) => (
+  <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
+    <header style={{ marginBottom: `1.5rem` }}>
+      <h3 style={{ display: `inline` }}>proyectosyekaos.com</h3>
+      <ul style={{ listStyle: `none`, float: `right` }}>
+        <li style={{ display: `inline`, marginRight: `1rem` }}>
+          <Link to="/">Inicio</Link>
+        </li>
+        <li style={{ display: `inline`, marginRight: `1rem` }}>
+          <Link to="/servicios">Servicios</Link>
+        </li>
+        <li style={{ display: `inline` }}>
+          <Link to="/contacto">Contacto</Link>
+        </li>
+      </ul>
+    </header>
+    {children}
+    <footer style={{ marginTop: `2rem` }}>
+      <p>© {new Date().getFullYear()}, yekaos.</p>
+    </footer>
+  </div>
+)
 
 export default Layout
